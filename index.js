@@ -6,6 +6,10 @@ const expressSession = require("express-session")({
   secret: "secret",
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: 30000,
+  },
 });
 
 app.use(bodyParser.json());
