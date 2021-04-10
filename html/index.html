@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="message-box">
+      <h1 id="welcome-message"></h1>
+      <div><a href="/private">Proceed to Admin</a></div>
+      <div><a href="/logout">Log Out</a></div>
+    </div>
+
+    <script>
+      const req = new XMLHttpRequest();
+      req.open("GET", "http://localhost:8000/user", true); // please change port to 3000 (I am using docker, so I have different port number)
+      req.send();
+
+      req.onreadystatechange = () => {
+        if (req.readyState == 4 && req.status == 200) {
+          const user = JSON.parse(req.response).user;
+          document.getElementById(
+            "welcome-message"
+          ).innerText = `Welcome ${user.username}!`;
+        }
+      };
+    </script>
+  </body>
+</html>
